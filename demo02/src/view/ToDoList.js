@@ -5,9 +5,8 @@ import {
   changeInputAction,
   addAction,
   deleteAction,
-  getListAction
+  getTodoList
 } from '../store/actionCreators'
-import axios from 'axios'
 
 export default class App extends Component {
   constructor(props) {
@@ -21,22 +20,7 @@ export default class App extends Component {
     store.subscribe(this.storeChange)
   }
   componentDidMount() {
-    axios
-      .get('http://rap2api.taobao.org/app/mock/242291/reactlesson')
-      .then(res => {
-        console.log('res', res.data)
-        store.dispatch(getListAction(res.data.list))
-        // let temp = []
-        // res.data.forEach(element => {
-        //   temp.push(element.title)
-        // });
-        // this.setState({
-        //   list:temp
-        // })
-      })
-      .catch(error => {
-        console.log('error', error)
-      })
+    store.dispatch(getTodoList())
   }
   storeChange() {
     this.setState(store.getState())
