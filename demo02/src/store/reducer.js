@@ -23,7 +23,7 @@ export default (state = defaultState, action) => {
       return temp
 
     case 'deleteItem':
-      temp.list.splice(action.value, 1)
+      temp.list.splice(action.index, 1)
       return temp
 
     case INPUT:
@@ -36,7 +36,7 @@ export default (state = defaultState, action) => {
       return temp
 
     case DELETE:
-      temp.list.splice(action.value, 1)
+      temp.list.splice(action.index, 1)
       return temp
 
     default:
