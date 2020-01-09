@@ -1,4 +1,4 @@
-import { INPUT, ADD, DELETE } from './actionTypes'
+import { INPUT, ADD, DELETE, GET_LIST } from './actionTypes'
 
 export const changeInputAction = value => ({
   type: INPUT,
@@ -10,4 +10,8 @@ export const addAction = () => ({
 export const deleteAction = index => ({
   type: DELETE,
   index
+})
+export const getListAction = data => ({
+  type: GET_LIST,
+  data
 })

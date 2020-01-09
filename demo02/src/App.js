@@ -4,8 +4,10 @@ import ToDoListUI from './ToDoListUI'
 import {
   changeInputAction,
   addAction,
-  deleteAction
+  deleteAction,
+  getListAction
 } from './store/actionCreators'
+import axios from 'axios'
 
 export default class App extends Component {
   constructor(props) {
@@ -18,29 +20,34 @@ export default class App extends Component {
     this.storeChange = this.storeChange.bind(this)
     store.subscribe(this.storeChange)
   }
+  componentDidMount() {
+    axios
+      .get('http://rap2api.taobao.org/app/mock/242291/reactlesson')
+      .then(res => {
+        console.log('res', res.data)
+        store.dispatch(getListAction(res.data.list))
+        // let temp = []
+        // res.data.forEach(element => {
+        //   temp.push(element.title)
+        // });
+        // this.setState({
+        //   list:temp
+        // })
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
+  }
   storeChange() {
     this.setState(store.getState())
   }
   changeInpueValue(e) {
-    // const a = {
-    //   type: INPUT,
-    //   value: e.target.value
-    // }
     store.dispatch(changeInputAction(e.target.value))
   }
   add() {
-    // const a = {
-    //   type: ADD
-    // }
     store.dispatch(addAction())
   }
   deleteItem(index) {
-    console.log('index :', index)
-    // console.log('index :', index)
-    // const a = {
-    //   type: DELETE,
-    //   index
-    // }
     store.dispatch(deleteAction(index))
   }
   render() {

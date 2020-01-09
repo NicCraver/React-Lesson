@@ -14,7 +14,6 @@ export default class ToDoList extends Component {
     this.add = this.add.bind(this)
     store.subscribe(this.storeChange)
   }
-
   storeChange() {
     this.setState(store.getState())
   }
@@ -40,6 +39,7 @@ export default class ToDoList extends Component {
     }
     store.dispatch(action)
   }
+
   render() {
     const { inputValue, list } = this.state
     return (

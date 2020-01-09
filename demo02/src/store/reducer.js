@@ -1,31 +1,12 @@
-import { INPUT, ADD, DELETE } from './actionTypes'
+import { INPUT, ADD, DELETE, GET_LIST } from './actionTypes'
 const defaultState = {
   inputValue: 'Write Somthing',
-  list: [
-    'Racing car sprays burning fuel into crowd.',
-    'Japanese princess to wed commoner.',
-    'Australian walks 100km after outback crash.',
-    'Man charged over missing wedding girl.',
-    'Los Angeles battles huge wildfires.'
-  ]
+  list: []
 }
 
 export default (state = defaultState, action) => {
   let temp = clone(state)
   switch (action.type) {
-    case 'changeInput':
-      temp.inputValue = action.value
-      return temp
-
-    case 'addItem':
-      temp.list.push(temp.inputValue)
-      temp.inputValue = ''
-      return temp
-
-    case 'deleteItem':
-      temp.list.splice(action.index, 1)
-      return temp
-
     case INPUT:
       temp.inputValue = action.value
       return temp
@@ -37,6 +18,9 @@ export default (state = defaultState, action) => {
 
     case DELETE:
       temp.list.splice(action.index, 1)
+      return temp
+    case GET_LIST:
+      temp.list = action.data
       return temp
 
     default:
